@@ -11,7 +11,6 @@ local function set_groups(user_config)
 	user_config = user_config or config.defaults
 	local is_dark_variant = user_config.variant == "dark"
 	local variant = is_dark_variant and colors.dark or colors.light
-
 	hl(0, "ColorColumn", { fg = variant.none, bg = variant.color_col })
 	hl(0, "Comment", { fg = variant.comment_fg, bg = variant.none, italic = true })
 	hl(0, "Conceal", { fg = variant.fg })
@@ -71,6 +70,12 @@ local function set_groups(user_config)
 	hl(0, "WarningMsg", { fg = variant.red, bg = variant.none })
 	hl(0, "Whitespace", { fg = variant.non_text, bg = variant.none })
 	hl(0, "WildMenu", { fg = variant.fg, bg = variant.none })
+
+	-- These groups are not listed as default vim groups,
+	-- but they are defacto standard group names for syntax highlighting.
+	-- commented out groups should chain up to their "preferred" group by
+	-- default.
+	-- Uncomment and edit if you want more specific syntax highlighting.
 	hl(0, "Boolean", { fg = variant.yellow, bg = variant.none })
 	hl(0, "Character", { fg = variant.yellow, bg = variant.none })
 	hl(0, "Conditional", { fg = variant.purple, bg = variant.none })
@@ -143,6 +148,20 @@ local function set_groups(user_config)
 	hl(0, "@tag.delimiter", { fg = variant.fg, bg = variant.none })
 	hl(0, "@tag.attribute", { fg = variant.fg, bg = variant.none })
 
+	-- I have no idea where these are used.
+	hl(0, "@text.title", { fg = variant.blue, bg = variant.none, bold = true })
+	hl(0, "@text.literal", { fg = variant.blue, bg = variant.none })
+	hl(0, "markdown@text.literal", { fg = variant.yellow, bg = variant.none })
+	hl(0, "markdown_inline@text.literal", { fg = variant.yellow, bg = variant.none })
+	hl(0, "@text.emphasis", { fg = variant.blue, bg = variant.none, italic = true })
+	hl(0, "@text.strong", { fg = variant.purple, bg = variant.none, bold = true })
+	hl(0, "@text.uri", { fg = variant.blue, bg = variant.none })
+	hl(0, "@textReference", { fg = variant.blue, bg = variant.none })
+	hl(0, "@stringEscape", { fg = variant.blue, bold = true })
+	hl(0, "@text.note", { fg = variant.blue, bg = variant.none, bold = true })
+	hl(0, "@text.warning", { fg = variant.yellow, bg = variant.none, bold = true })
+	hl(0, "@text.danger", { fg = variant.red, bg = variant.none, bold = true })
+
 	-- LSP
 	hl(0, "DiagnosticError", { fg = variant.red, bg = variant.none })
 	hl(0, "DiagnosticWarn", { fg = variant.yellow, bg = variant.none })
@@ -158,50 +177,33 @@ local function set_groups(user_config)
 
 	-- IndentBlankLine
 	hl(0, "IndentBlanklineContextChar", { fg = variant.purple, bg = variant.none, nocombine = true })
+	-- These do not seem to work.
+	-- hl(0, 'IndentBlanklineContextStart', { fg = variant.purple, bg = variant.none, nocombine = true })
+	-- hl(0, 'IndentBlanklineChar', { fg = variant.comment_fg, bg = variant.none, nocombine = true })
+	-- hl(0, 'IndentBlanklineSpaceChar', { fg = variant.purple, bg = variant.none, nocombine = true })
+	-- hl(0, 'IndentBlanklineSpaceCharBlankline', { fg = variant.purple, bg = variant.none, nocombine = true })
 
 	-- Ruby
 	hl(0, "rubyStringDelimiter", { fg = variant.green, bg = variant.none })
 	hl(0, "rubyKeywordAsMethod", { fg = variant.blue, bg = variant.none })
 	hl(0, "slimRuby", { fg = variant.blue, bg = variant.none })
 
-	-- Misc
-	hl(0, "@text.title", { fg = variant.blue, bg = variant.none, bold = true })
-	hl(0, "@text.literal", { fg = variant.blue, bg = variant.none })
-	hl(0, "markdown@text.literal", { fg = variant.yellow, bg = variant.none })
-	hl(0, "markdown_inline@text.literal", { fg = variant.yellow, bg = variant.none })
-	hl(0, "@text.emphasis", { fg = variant.blue, bg = variant.none, italic = true })
-	hl(0, "@text.strong", { fg = variant.purple, bg = variant.none, bold = true })
-	hl(0, "@text.uri", { fg = variant.blue, bg = variant.none })
-	hl(0, "@textReference", { fg = variant.blue, bg = variant.none })
-	hl(0, "@stringEscape", { fg = variant.blue, bold = true })
-	hl(0, "@text.note", { fg = variant.blue, bg = variant.none, bold = true })
-	hl(0, "@text.warning", { fg = variant.yellow, bg = variant.none, bold = true })
-	hl(0, "@text.danger", { fg = variant.red, bg = variant.none, bold = true })
-end
-
-local function link_highlight()
-	-- LSP Semantic Token Groups
-	hl(0, "@lsp.type.comment", { link = "@comment" })
-	hl(0, "@lsp.type.enum", { link = "@type" })
-	hl(0, "@lsp.type.interface", { link = "Identifier" })
-	hl(0, "@lsp.type.keyword", { link = "@keyword" })
-	hl(0, "@lsp.type.namespace", { link = "@namespace" })
-	hl(0, "@lsp.type.parameter", { link = "@parameter" })
-	hl(0, "@lsp.type.property", { link = "@property" })
-	hl(0, "@lsp.type.variable", {}) -- use treesitter styles for regular variables
-	hl(0, "@lsp.typemod.method.defaultLibrary", { link = "@function.builtin" })
-	hl(0, "@lsp.typemod.function.defaultLibrary", { link = "@function.builtin" })
-	hl(0, "@lsp.typemod.operator.injected", { link = "@operator" })
-	hl(0, "@lsp.typemod.string.injected", { link = "@string" })
-	hl(0, "@lsp.typemod.variable.defaultLibrary", { link = "@variable.builtin" })
-	hl(0, "@lsp.typemod.variable.injected", { link = "@variable" })
-
-	-- NOTE: maybe add these with distinct highlights?
-	-- ["@lsp.typemod.variable.globalScope"] (global variables)
-	-- Legacy groups for official git.vim and diff.vim syntax
-	hl(0, "diffAdded", { link = "DiffAdd" })
-	hl(0, "diffChanged", { link = "DiffChange" })
-	hl(0, "diffRemoved", { link = "DiffDelete" })
+	-- nvim-notify
+	hl(0, "NotifyERRORBorder", { fg = variant.red, bg = variant.none })
+	hl(0, "NotifyWARNBorder", { fg = variant.yellow, bg = variant.none })
+	hl(0, "NotifyINFOBorder", { fg = variant.blue, bg = variant.none })
+	hl(0, "NotifyDEBUGBorder", { fg = variant.comment_fg, bg = variant.none })
+	hl(0, "NotifyTRACEBorder", { fg = variant.purple, bg = variant.none })
+	hl(0, "NotifyERRORIcon", { fg = variant.red, bg = variant.none })
+	hl(0, "NotifyWARNIcon", { fg = variant.yellow, bg = variant.none })
+	hl(0, "NotifyINFOIcon", { fg = variant.blue, bg = variant.none })
+	hl(0, "NotifyDEBUGIcon", { fg = variant.comment_fg, bg = variant.none })
+	hl(0, "NotifyTRACEIcon", { fg = variant.purple, bg = variant.none })
+	hl(0, "NotifyERRORTitle", { fg = variant.fg, bg = variant.none })
+	hl(0, "NotifyWARNTitle", { fg = variant.fg, bg = variant.none })
+	hl(0, "NotifyINFOTitle", { fg = variant.fg, bg = variant.none })
+	hl(0, "NotifyDEBUGTitle", { fg = variant.fg, bg = variant.none })
+	hl(0, "NotifyTRACETitle", { fg = variant.fg, bg = variant.none })
 end
 
 -- @param table values
