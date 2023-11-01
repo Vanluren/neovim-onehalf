@@ -206,7 +206,7 @@ local function set_groups(user_config)
 	hl(0, "NotifyTRACETitle", { fg = variant.fg, bg = variant.none })
 end
 
-function M.link_highlight()
+local function link_highlight()
 	-- LSP Semantic Token Groups
 	hl(0, "@lsp.type.comment", { link = "@comment" })
 	hl(0, "@lsp.type.enum", { link = "@type" })
