@@ -8,12 +8,8 @@ local hl = vim.api.nvim_set_hl
 -- Set highlight groups.
 -- @param table config
 local function set_groups(user_config)
+	user_config = user_config or config.defaults
 	local is_dark_variant = user_config.variant == "dark"
-	vim.notify(
-		"is_dark_variant: " .. tostring(user_config.variant),
-		vim.log.levels.INFO,
-		{ title = "One Half colorscheme" }
-	)
 	local colors = is_dark_variant and theme.dark or theme.light
 
 	hl(0, "ColorColumn", { fg = colors.none, bg = colors.color_col })
@@ -218,10 +214,6 @@ function M.setup(values)
 		)
 		return
 	end
-
-	values = values or {}
-
-	setmetatable(config, { __index = vim.tbl_extend("force", config.defaults, values) })
 
 	vim.cmd("hi clear")
 	if vim.fn.exists("syntax_on") then
