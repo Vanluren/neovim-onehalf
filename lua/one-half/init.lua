@@ -5,10 +5,10 @@ local M = {}
 local theme = require("one-half.theme")
 local config = require("ayu.config")
 
--- @param string table
-setmetatable(config, { __index = vim.tbl_extend("force", config.defaults, values) })
-
 function M.setup(values)
+	-- @param string table
+	setmetatable(config, { __index = vim.tbl_extend("force", config.defaults, values) })
+
 	vim.cmd("hi clear")
 	if vim.fn.exists("syntax_on") then
 		vim.cmd("syntax reset")
