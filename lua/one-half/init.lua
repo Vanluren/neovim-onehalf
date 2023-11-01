@@ -11,6 +11,7 @@ local function set_groups(user_config)
 	user_config = user_config or config.defaults
 	local is_dark_variant = user_config.variant == "dark"
 	local variant = is_dark_variant and colors.dark or colors.light
+
 	hl(0, "ColorColumn", { fg = variant.none, bg = variant.color_col })
 	hl(0, "Comment", { fg = variant.comment_fg, bg = variant.none, italic = true })
 	hl(0, "Conceal", { fg = variant.fg })
@@ -101,9 +102,9 @@ local function set_groups(user_config)
 	-- Treesitter
 	-- Find the symbol for the current node by calling :TSHighlightCapturesUnderCursor.
 	hl(0, "@error", { fg = variant.red, bg = variant.gutter_bg })
-	hl(0, "@punctuation.bracket", { fg = is_dark and variant.white or variant.black, bg = variant.none })
-	hl(0, "@punctuation.delimiter", { fg = is_dark and variant.white or variant.black, bg = variant.none })
-	hl(0, "@punctuation.special", { fg = is_dark and variant.white or variant.black, bg = variant.none })
+	hl(0, "@punctuation.bracket", { fg = is_dark_variant and variant.white or variant.black, bg = variant.none })
+	hl(0, "@punctuation.delimiter", { fg = is_dark_variant and variant.white or variant.black, bg = variant.none })
+	hl(0, "@punctuation.special", { fg = is_dark_variant and variant.white or variant.black, bg = variant.none })
 	hl(0, "@comment", { fg = variant.comment_fg, bg = variant.none, italic = true })
 	hl(0, "@constant", { fg = variant.cyan, bg = variant.none, italic = true })
 	hl(0, "@constant.builtin", { fg = variant.cyan, bg = variant.none })
@@ -140,7 +141,7 @@ local function set_groups(user_config)
 	hl(0, "@structure", { fg = variant.yellow, bg = variant.none })
 	hl(0, "@symbol", { fg = variant.cyan, bg = variant.none, italic = true })
 	hl(0, "@include", { fg = variant.purple, bg = variant.none })
-	hl(0, "@variable", { fg = is_dark and variant.white or variant.black, bg = variant.none })
+	hl(0, "@variable", { fg = is_dark_variant and variant.white or variant.black, bg = variant.none })
 	hl(0, "@variable.builtin", { fg = variant.cyan, bg = variant.none, italic = true })
 	hl(0, "@text", { fg = variant.text, bg = variant.none })
 	hl(0, "@text.underline", { fg = variant.text, bg = variant.none, underline = true })
