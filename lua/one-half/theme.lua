@@ -4,7 +4,7 @@ local hl = vim.api.nvim_set_hl
 local M = {}
 
 -- Set highlight groups.
-function M.setup(config)
+function M.set_groups(config)
 	local is_dark = config.variant == "dark"
 	local c = is_dark and colors.dark or colors.light
 
