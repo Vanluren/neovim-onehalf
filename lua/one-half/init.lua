@@ -13,8 +13,6 @@ function M.setup(values)
 		)
 		return
 	end
-	-- @param string table
-	setmetatable(config, { __index = vim.tbl_extend("force", config.default_config, values) })
 
 	vim.cmd("hi clear")
 	if vim.fn.exists("syntax_on") then
