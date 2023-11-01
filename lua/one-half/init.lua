@@ -1,9 +1,8 @@
 -- one-half color scheme
--- Lua port of https://github.com/sonph/onehalf
--- By https://github.com/sonph/onehalf
+-- Neovim ready port of https://github.com/sonph/onehalf
 local M = {}
 local theme = require("one-half.theme")
-local config = require("ayu.config")
+local config = require("one-half.config")
 
 function M.setup(values)
 	-- @param string table
