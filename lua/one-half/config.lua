@@ -1,6 +1,6 @@
 local config = {
 	defaults = {
-		version = "dark",
+		variant = "dark",
 	},
 }
 
