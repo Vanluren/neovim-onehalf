@@ -17,7 +17,7 @@ function M.setup(values)
 	vim.opt.termguicolors = true
 	vim.g.colors_name = "one-half"
 
-	theme.setup(values.variant)
+	theme.setup(values)
 	theme.link_highlight()
 end
 
