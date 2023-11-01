@@ -203,7 +203,7 @@ local function link_highlight()
 	hl(0, "diffRemoved", { link = "DiffDelete" })
 end
 
--- @param table
+-- @param table values
 function M.setup(values)
 	if vim.version().minor < 8 then
 		vim.notify(
@@ -220,6 +220,8 @@ function M.setup(values)
 	if vim.fn.exists("syntax_on") then
 		vim.cmd("syntax reset")
 	end
+
+	values = values or config.defaults
 
 	vim.opt.termguicolors = true
 	vim.g.colors_name = "one-half"
