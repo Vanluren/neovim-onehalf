@@ -22,7 +22,7 @@ function M.setup(values)
 	end
 
 	vim.opt.termguicolors = true
-	vim.g.colors_name = "One Half"
+	vim.g.colors_name = "one-half"
 
 	config.set_groups(values.defaults)
 	config.link_highlight()
