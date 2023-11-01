@@ -1,11 +1,18 @@
 -- one-half color scheme
 -- Neovim ready port of https://github.com/sonph/onehalf
 local M = {}
-local theme = require("one-half.theme")
 local config = require("one-half.config")
 
 -- @param table
 function M.setup(values)
+	if vim.version().minor < 8 then
+		vim.notify(
+			"Neovim 0.8+ is required for ayu colorscheme",
+			vim.log.levels.ERROR,
+			{ title = "One Half colorscheme" }
+		)
+		return
+	end
 	-- @param string table
 	setmetatable(config, { __index = vim.tbl_extend("force", config.defaults, values) })
 
@@ -15,10 +22,10 @@ function M.setup(values)
 	end
 
 	vim.opt.termguicolors = true
-	vim.g.colors_name = "one-half"
+	vim.g.colors_name = "One Half"
 
-	theme.set_groups(values.defaults)
-	theme.link_highlight()
+	config.set_groups(values.defaults)
+	config.link_highlight()
 end
 
 return M
