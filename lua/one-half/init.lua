@@ -214,14 +214,14 @@ function M.setup(values)
 		return
 	end
 
+	values = values or {}
+
 	setmetatable(config, { __index = vim.tbl_extend("force", config.defaults, values) })
 
 	vim.cmd("hi clear")
 	if vim.fn.exists("syntax_on") then
 		vim.cmd("syntax reset")
 	end
-
-	values = values or config.defaults
 
 	vim.opt.termguicolors = true
 	vim.g.colors_name = "one-half"
