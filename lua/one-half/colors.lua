@@ -29,6 +29,7 @@ M.light.bg = M.light.white
 M.light.text = M.light.black
 
 M.dark = {
+	none = "NONE",
 	black = "#282c34",
 	red = "#e06c75",
 	green = "#98c379",
