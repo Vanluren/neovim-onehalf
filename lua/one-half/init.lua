@@ -9,6 +9,11 @@ local hl = vim.api.nvim_set_hl
 -- @param table config
 local function set_groups(user_config)
 	local is_dark_variant = user_config.variant == "dark"
+	vim.notify(
+		"is_dark_variant: " .. tostring(is_dark_variant),
+		vim.log.levels.INFO,
+		{ title = "One Half colorscheme" }
+	)
 	local colors = is_dark_variant and theme.dark or theme.light
 
 	hl(0, "ColorColumn", { fg = colors.none, bg = colors.color_col })
