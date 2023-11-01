@@ -4,6 +4,7 @@ local M = {}
 local theme = require("one-half.theme")
 local config = require("one-half.config")
 
+-- @param table
 function M.setup(values)
 	-- @param string table
 	setmetatable(config, { __index = vim.tbl_extend("force", config.defaults, values) })
