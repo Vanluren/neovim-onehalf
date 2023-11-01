@@ -7,7 +7,7 @@ local hl = vim.api.nvim_set_hl
 
 -- Set highlight groups.
 -- @param table config
-function M.set_groups(user_config)
+local function set_groups(user_config)
 	local is_dark_variant = user_config.variant == "dark"
 	local colors = is_dark_variant and theme.dark or theme.light
 
@@ -178,7 +178,7 @@ function M.set_groups(user_config)
 	hl(0, "@text.danger", { fg = colors.red, bg = colors.none, bold = true })
 end
 
-function M.link_highlight()
+local function link_highlight()
 	-- LSP Semantic Token Groups
 	hl(0, "@lsp.type.comment", { link = "@comment" })
 	hl(0, "@lsp.type.enum", { link = "@type" })
@@ -217,13 +217,13 @@ function M.setup(values)
 	vim.cmd("hi clear")
 	if vim.fn.exists("syntax_on") then
 		vim.cmd("syntax reset")
-	end
+
 
 	vim.opt.termguicolors = true
 	vim.g.colors_name = "one-half"
 
-	config.set_groups(values)
-	config.link_highlight()
+	set_groups(values)
+	link_highlight()
 end
 
 return M
