@@ -3,8 +3,11 @@
 -- By https://github.com/sonph/onehalf
 local M = {}
 local theme = require("one-half.theme")
+local config = require("ayu.config")
 
 -- @param string table
+setmetatable(config, { __index = vim.tbl_extend("force", config.defaults, values) })
+
 function M.setup(values)
 	vim.cmd("hi clear")
 	if vim.fn.exists("syntax_on") then
@@ -16,15 +19,6 @@ function M.setup(values)
 
 	theme.setup(values.variant)
 	theme.link_highlight()
-end
-
--- @param string style
-function M.change_style(style)
-	vim.opt.background = style
-	theme.setup(style)
-	theme.link_highlight()
-	print("one-half style: ", style)
-	vim.cmd([[colorscheme one-half]])
 end
 
 return M
